@@ -2,6 +2,9 @@
 <gadget>
   <name>ISS UStream</name>
   <version>1.0.0.0</version>
+  <icons>
+    <icon height="64" width="64" src="Icon.jpg" />
+  </icons>
   <hosts>
     <host name="sidebar">
       <base type="HTML" apiVersion="1.0.0" src="UStream.html" />
