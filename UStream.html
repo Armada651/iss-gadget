@@ -16,21 +16,25 @@
             overflow: hidden;
             background-color: black;
         }
+        #mouseOverlay
+        {
+            position: absolute;
+            top: 0;
+            width: 360px;
+            height: 238px;
+            background-image: url('transparent.png');
+        }
         </style>
         <script>
             var toolbarSize = 32;
             
             System.Gadget.onDock = dock;
             System.Gadget.onUndock = undock;
+            System.Gadget.Flyout.onShow = showFlyout;
+            System.Gadget.Flyout.onHide = hideFlyout;
             
-            function dock()
-            {
-                resize(360, 270)
-            }
-            
-            function undock()
-            {
-                resize(640, 480)
+            function init() {
+                System.Gadget.Flyout.file = "Tracker.html";
             }
             
             function resize(x,y)
@@ -51,9 +55,39 @@
                 sEmbed.width = x;
                 sEmbed.height = y+toolbarSize;
             }
+            
+            function dock()
+            {
+                resize(360, 270)
+            }
+            
+            function undock()
+            {
+                resize(640, 480)
+            }
+            
+            function showFlyout()
+            {
+                if (!System.Gadget.Flyout.show) {
+                    System.Gadget.Flyout.show = true;
+                }
+            }
+            
+            function hideFlyout()
+            {
+                if (System.Gadget.Flyout.show) {
+                    System.Gadget.Flyout.show = false;
+                }
+            }
+            
+            function toggleFlyout()
+            {
+                bShow = System.Gadget.Flyout.show;
+                System.Gadget.Flyout.show = !bShow;
+            }
         </script>
     </head>
-    <body>
+    <body onload="init();">
         <div id="gadgetContent">
             <object id="streamObject" width="360" height="302" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
                 <param name="flashvars" value="cid=9408562&amp;autoplay=true&amp;volume=0&amp;locale=en_US"/>
@@ -63,6 +97,8 @@
                 <param name="src" value="http://www.ustream.tv/flash/viewer.swf"/>
                 <embed id="streamEmbed" flashvars="cid=9408562&amp;autoplay=false&amp;locale=en_US" width="360" height="302" allowfullscreen="true" allowscriptaccess="always" src="http://www.ustream.tv/flash/viewer.swf" type="application/x-shockwave-flash" wmode="transparent"></embed>
             </object>
+        </div>
+        <div id="mouseOverlay" onclick="toggleFlyout();">
         </div>
     </body>
 </html>
