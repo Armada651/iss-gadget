@@ -22,7 +22,8 @@
                 top: 0;
                 width: 360px;
                 height: 238px;
-                background-image: url('transparent.png');
+                background: transparent url('transparent.png') repeat;
+                z-index: 1;
             }
         </style>
         <script>
@@ -42,6 +43,10 @@
                 var sBody = document.body.style;
                 sBody.width = x;
                 sBody.height = y;
+                
+                var sOverlay = document.getElementById("mouseOverlay").style;
+                sOverlay.width = x;
+                sOverlay.height = y-toolbarSize;
                 
                 var sGadget = document.getElementById("gadgetContent").style;
                 sGadget.width = x;
