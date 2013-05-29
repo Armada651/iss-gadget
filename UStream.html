@@ -43,18 +43,26 @@
             System.Gadget.onDock = dock;
             System.Gadget.onUndock = undock;
             System.Gadget.Flyout.file = "Tracker.html";
+            System.Gadget.Flyout.onShow = onShowFlyout;
+            System.Gadget.Flyout.onHide = onHideFlyout;
+            
+            var timeoutID = window.setTimeout(hideTracker, 1200);
+            var mouseIn = false;
             
             $(document).ready(function() {
-                var timeoutID = window.setTimeout(hideTracker, 1200);
                 $('#mouseOverlay a').fadeOut();
                 
                 $('body').mouseenter(function() {
+                    mouseIn = true;
                     window.clearTimeout(timeoutID);
                     showTracker();
                 });
                 
                 $('body').mouseleave(function() {
-                    timeoutID = window.setTimeout(hideTracker, 1200);
+                    mouseIn = false;
+                    if (!System.Gadget.Flyout.show) {
+                        timeoutID = window.setTimeout(hideTracker, 1200);
+                    }
                 });
                 
                 $('#mouseOverlay').click(function() {
@@ -62,11 +70,15 @@
                 });
                 
                 $('#mouseOverlay').mouseenter(function() {
+                    $(this).addClass('hovered');
                     $('#mouseOverlay a').fadeIn(100);
                 });
                 
                 $('#mouseOverlay').mouseleave(function() {
-                    $('#mouseOverlay a').fadeOut(100);
+                    $(this).removeClass('hovered');
+                    if (!System.Gadget.Flyout.show) {
+                        $('#mouseOverlay a').fadeOut(100);
+                    }
                 });
             });
             
@@ -80,10 +92,23 @@
             
             function hideTracker()
             {
+                $('#mouseOverlay a').fadeOut(0);
                 $('#mouseOverlay').animate({
                     opacity: 0,
                     top: '24'
                 }, 500);
+            }
+            
+            function onShowFlyout()
+            {
+                window.clearTimeout(timeoutID);
+                $('#mouseOverlay a').fadeIn(0);
+            }
+            
+            function onHideFlyout()
+            {
+                if (!mouseIn) hideTracker();
+                $('#mouseOverlay:not(.hovered) a').fadeOut(100);
             }
             
             function resize(x,y)
