@@ -27,17 +27,64 @@
                 background: transparent url('tracker_off.png') center no-repeat;
                 z-index: 1;
             }
-            #mouseOverlay:hover
+            #mouseOverlay a
             {
+                display: block;
+                width: 46px;
+                height: 46px;
                 background-image: url('tracker_on.png');
+                cursor: pointer;
             }
         </style>
+        <script src="jquery-1.10.0.min.js"></script>
         <script>
             var toolbarSize = 32;
             
             System.Gadget.onDock = dock;
             System.Gadget.onUndock = undock;
             System.Gadget.Flyout.file = "Tracker.html";
+            
+            $(document).ready(function() {
+                var timeoutID = window.setTimeout(hideTracker, 1200);
+                $('#mouseOverlay a').fadeOut();
+                
+                $('body').mouseenter(function() {
+                    window.clearTimeout(timeoutID);
+                    showTracker();
+                });
+                
+                $('body').mouseleave(function() {
+                    timeoutID = window.setTimeout(hideTracker, 1200);
+                });
+                
+                $('#mouseOverlay').click(function() {
+                    toggleFlyout(); 
+                });
+                
+                $('#mouseOverlay').mouseenter(function() {
+                    $('#mouseOverlay a').fadeIn(100);
+                });
+                
+                $('#mouseOverlay').mouseleave(function() {
+                    $('#mouseOverlay a').fadeOut(100);
+                });
+            });
+            
+            function showTracker()
+            {
+                $('#mouseOverlay').animate({
+                    opacity: 1,
+                    top: '8'
+                }, 500);
+            }
+            
+            function hideTracker()
+            {
+                $('#mouseOverlay').animate({
+                    opacity: 0,
+                    top: '24'
+                }, 500);
+            }
             
             function resize(x,y)
             {
@@ -100,6 +147,8 @@
                 <embed id="streamEmbed" flashvars="cid=9408562&amp;autoplay=false&amp;locale=en_US" width="360" height="302" allowfullscreen="true" allowscriptaccess="always" src="http://www.ustream.tv/flash/viewer.swf" type="application/x-shockwave-flash" wmode="transparent"></embed>
             </object>
         </div>
-        <a id="mouseOverlay" href="javascript:void(0)" onclick="toggleFlyout();"></a>
+        <div id="mouseOverlay">
+            <a></a>
+        </div>
     </body>
 </html>
