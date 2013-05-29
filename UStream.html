@@ -19,11 +19,17 @@
             #mouseOverlay
             {
                 position: absolute;
-                top: 0;
-                width: 360px;
-                height: 238px;
-                background: transparent url('transparent.png') repeat;
+                top: 8px;
+                left: 8px;
+                width: 46px;
+                height: 46px;
+                border-radius: 3px;
+                background: transparent url('tracker_off.png') center no-repeat;
                 z-index: 1;
+            }
+            #mouseOverlay:hover
+            {
+                background-image: url('tracker_on.png');
             }
         </style>
         <script>
@@ -38,10 +44,6 @@
                 var sBody = document.body.style;
                 sBody.width = x;
                 sBody.height = y;
-                
-                var sOverlay = document.getElementById("mouseOverlay").style;
-                sOverlay.width = x;
-                sOverlay.height = y-toolbarSize;
                 
                 var sGadget = document.getElementById("gadgetContent").style;
                 sGadget.width = x;
@@ -98,7 +100,6 @@
                 <embed id="streamEmbed" flashvars="cid=9408562&amp;autoplay=false&amp;locale=en_US" width="360" height="302" allowfullscreen="true" allowscriptaccess="always" src="http://www.ustream.tv/flash/viewer.swf" type="application/x-shockwave-flash" wmode="transparent"></embed>
             </object>
         </div>
-        <div id="mouseOverlay" onclick="toggleFlyout();">
-        </div>
+        <a id="mouseOverlay" href="javascript:void(0)" onclick="toggleFlyout();"></a>
     </body>
 </html>
