@@ -71,13 +71,13 @@
                 
                 $('#mouseOverlay').mouseenter(function() {
                     $(this).addClass('hovered');
-                    $('#mouseOverlay a').fadeIn(100);
+                    $('#mouseOverlay a').fadeIn(300);
                 });
                 
                 $('#mouseOverlay').mouseleave(function() {
                     $(this).removeClass('hovered');
                     if (!System.Gadget.Flyout.show) {
-                        $('#mouseOverlay a').fadeOut(100);
+                        $('#mouseOverlay a').fadeOut(300);
                     }
                 });
             });
@@ -108,7 +108,7 @@
             function onHideFlyout()
             {
                 if (!mouseIn) hideTracker();
-                $('#mouseOverlay:not(.hovered) a').fadeOut(100);
+                $('#mouseOverlay:not(.hovered) a').fadeOut(300);
             }
             
             function resize(x,y)
