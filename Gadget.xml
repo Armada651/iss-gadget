@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <gadget>
     <name>ISS Earth Viewing</name>
-    <version>1.2.0.0</version>
+    <version>1.3.0.0</version>
     <icons>
-        <icon height="64" width="64" src="Icon.jpg" />
+        <icon height="64" width="64" src="Icon.png" />
     </icons>
     <hosts>
         <host name="sidebar">
