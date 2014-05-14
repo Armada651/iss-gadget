@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <gadget>
-    <name>ISS UStream</name>
+    <name>Live ISS Stream</name>
     <version>1.2.0.0</version>
     <icons>
         <icon height="64" width="64" src="Icon.jpg" />
